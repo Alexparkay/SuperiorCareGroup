@@ -92,7 +92,7 @@ const Navbar = () => {
                 </Link>
               ))}
               <Link
-                to="/#genuine-care"
+                to="/contact"
                 className="ml-4 px-6 py-2 rounded-full text-base font-semibold transition-all transform hover:scale-105 bg-amber-400 text-blue-900 hover:bg-amber-300"
               >
                 Book a Free Assessment
@@ -191,7 +191,7 @@ const Navbar = () => {
                 </div>
                 <div className="mt-6 pt-6 border-t border-blue-800">
                   <Link
-                    to="/#genuine-care"
+                    to="/contact"
                     className="block w-full px-6 py-3 text-center font-semibold text-blue-900 bg-amber-400 hover:bg-amber-300 rounded-lg shadow-warm hover:shadow-warm-lg transition-all transform hover:scale-105"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >

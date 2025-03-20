@@ -355,7 +355,7 @@ const CommunityCare = () => {
                   At Superior Care Group, we believe everyone deserves to live with dignity, independence, and purpose.
                 </p>
                 <Link
-                  to="/#genuine-care"
+                  to="/contact"
                   className="inline-block bg-amber-500 text-blue-900 px-8 py-4 rounded-lg font-semibold hover:bg-amber-400 transition-all transform hover:scale-105 shadow-xl"
                 >
                   Start Your Journey Today
@@ -522,7 +522,7 @@ const CommunityCare = () => {
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Link
-                  to="/#genuine-care"
+                  to="/contact"
                   className="group relative bg-gradient-to-r from-amber-400 to-amber-500 text-blue-900 px-8 py-4 rounded-lg font-semibold overflow-hidden shadow-lg"
                 >
                   <span className="relative z-10 flex items-center justify-center">
