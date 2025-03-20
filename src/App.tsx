@@ -1,5 +1,6 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
+import { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ChatWidget from './components/ChatWidget';
@@ -12,6 +13,33 @@ import Careers from './pages/Careers';
 import Contact from './pages/Contact';
 import LocalTeam from './pages/LocalTeam';
 
+// ScrollToTop component to handle scrolling to top on route changes
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  
+  return null;
+}
+
+// FooterWrapper component to conditionally render the Footer
+function FooterWrapper() {
+  const { pathname } = useLocation();
+  
+  // Don't show footer on the contact page
+  if (pathname === '/contact') {
+    return null;
+  }
+  
+  return (
+    <ErrorBoundary fallback={<div className="mt-auto"></div>}>
+      <Footer />
+    </ErrorBoundary>
+  );
+}
+
 function App() {
   return (
     <Router>
@@ -19,6 +47,9 @@ function App() {
         <ErrorBoundary fallback={<div className="p-4 bg-red-100 text-red-800">Navigation error. Please refresh the page.</div>}>
           <Navbar />
         </ErrorBoundary>
+        
+        {/* ScrollToTop component to ensure page starts at the top */}
+        <ScrollToTop />
         
         <AnimatePresence mode="wait">
           <Routes>
@@ -36,9 +67,8 @@ function App() {
           </Routes>
         </AnimatePresence>
         
-        <ErrorBoundary fallback={<div className="mt-auto"></div>}>
-          <Footer />
-        </ErrorBoundary>
+        {/* Conditionally render the Footer */}
+        <FooterWrapper />
         
         <ErrorBoundary fallback={null}>
           <ChatWidget />

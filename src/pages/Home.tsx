@@ -186,7 +186,7 @@ const Home = () => {
               </p>
               <div className="flex flex-col sm:flex-row gap-8 justify-center">
                 <a
-                  href="#booking-widget"
+                  href="#genuine-care"
                   className="group relative overflow-hidden bg-gradient-to-r from-amber-400 to-amber-500 text-blue-900 px-10 py-5 rounded-full font-bold text-lg hover:from-amber-300 hover:to-amber-400 transform hover:scale-105 transition-all shadow-2xl"
                 >
                   <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
@@ -790,7 +790,7 @@ const Home = () => {
         </section>
 
         {/* CTA Section */}
-        <section id="booking-widget" className="relative py-28 bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700 text-white overflow-hidden">
+        <section id="genuine-care" className="relative py-28 bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700 text-white overflow-hidden">
           {/* Decorative elements */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-blue-600/20 blur-3xl"></div>

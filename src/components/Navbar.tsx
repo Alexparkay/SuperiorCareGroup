@@ -7,25 +7,36 @@ const Navbar = () => {
   const [visible, setVisible] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
-  // Handle scroll behavior: hide at top, show when scrolling down
+  // Handle scroll behavior: always show navbar on non-homepage, hide at top for homepage only
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
       
-      // Show navbar when scrolling down and hide when at the top
-      if (currentScrollPos > 100) {
-        setVisible(true);
+      if (isHomePage) {
+        // Homepage behavior: Show navbar when scrolling down and hide when at the top
+        if (currentScrollPos > 100) {
+          setVisible(true);
+        } else {
+          setVisible(false);
+        }
       } else {
-        setVisible(false);
+        // All other pages: Always show the navbar
+        setVisible(true);
       }
       
       setPrevScrollPos(currentScrollPos);
     };
 
+    // Initial state setup
+    if (!isHomePage) {
+      setVisible(true);
+    }
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [prevScrollPos]);
+  }, [prevScrollPos, isHomePage]);
 
   const navigation = [
     { name: 'Home', href: '/' },
@@ -39,7 +50,9 @@ const Navbar = () => {
     <>
       <header 
         className={`fixed w-full z-50 transition-all duration-300 ${
-          visible ? "bg-black/10 backdrop-blur-sm py-5 shadow-lg translate-y-0" : "py-6 -translate-y-full"
+          visible 
+            ? "bg-black/50 backdrop-blur-sm py-5 shadow-lg translate-y-0" 
+            : "py-6 -translate-y-full"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -62,27 +75,27 @@ const Navbar = () => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`relative px-3 py-2 text-sm font-medium transition-colors ${
+                  className={`relative px-3 py-2 text-base font-medium transition-colors ${
                     location.pathname === item.href
-                      ? 'text-white drop-shadow-md'
-                      : 'text-white/95 hover:text-white drop-shadow-md'
+                      ? 'text-white font-semibold drop-shadow-md'
+                      : 'text-white hover:text-amber-200 drop-shadow-md'
                   }`}
                 >
                   {item.name}
                   {location.pathname === item.href && (
                     <motion.div
                       layoutId="navbar-underline"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-white"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-300"
                       initial={false}
                     />
                   )}
                 </Link>
               ))}
               <Link
-                to="/#booking-widget"
-                className="ml-4 px-6 py-2 rounded-full text-sm font-semibold transition-all transform hover:scale-105 bg-white text-blue-900 hover:bg-white/90"
+                to="/#genuine-care"
+                className="ml-4 px-6 py-2 rounded-full text-base font-semibold transition-all transform hover:scale-105 bg-amber-400 text-blue-900 hover:bg-amber-300"
               >
-                Get Care Support
+                Book a Free Assessment
               </Link>
             </div>
 
@@ -131,8 +144,8 @@ const Navbar = () => {
             className="fixed inset-0 z-40 lg:hidden"
           >
             <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)} />
-            <nav className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-white/95 backdrop-blur-md shadow-xl">
-              <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200">
+            <nav className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-blue-900/95 backdrop-blur-md shadow-xl">
+              <div className="flex items-center justify-between px-6 py-4 border-b border-blue-800">
                 <img
                   src="/images/logo/SCG-Logo.png"
                   alt="Superior Care Group"
@@ -140,7 +153,7 @@ const Navbar = () => {
                 />
                 <button
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="p-2 text-gray-600 hover:text-blue-600 transition-colors"
+                  className="p-2 text-white hover:text-amber-200 transition-colors"
                   aria-label="Close menu"
                 >
                   <span className="sr-only">Close menu</span>
@@ -167,8 +180,8 @@ const Navbar = () => {
                       to={item.href}
                       className={`block px-4 py-3 text-base font-medium rounded-lg transition-colors ${
                         location.pathname === item.href
-                          ? 'bg-blue-50 text-blue-600'
-                          : 'text-gray-900 hover:bg-gray-50'
+                          ? 'bg-blue-800 text-white'
+                          : 'text-white hover:bg-blue-800/70'
                       }`}
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
@@ -176,13 +189,13 @@ const Navbar = () => {
                     </Link>
                   ))}
                 </div>
-                <div className="mt-6 pt-6 border-t border-gray-200">
+                <div className="mt-6 pt-6 border-t border-blue-800">
                   <Link
-                    to="/#booking-widget"
-                    className="block w-full px-6 py-3 text-center font-semibold text-white bg-gradient-to-r from-blue-600 to-blue-500 rounded-lg shadow-warm hover:shadow-warm-lg transition-all transform hover:scale-105"
+                    to="/#genuine-care"
+                    className="block w-full px-6 py-3 text-center font-semibold text-blue-900 bg-amber-400 hover:bg-amber-300 rounded-lg shadow-warm hover:shadow-warm-lg transition-all transform hover:scale-105"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Get Care Support
+                    Book a Free Assessment
                   </Link>
                 </div>
               </div>
