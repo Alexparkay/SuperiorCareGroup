@@ -4,7 +4,28 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
   const location = useLocation();
+
+  // Handle scroll behavior: hide at top, show when scrolling down
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.scrollY;
+      
+      // Show navbar when scrolling down and hide when at the top
+      if (currentScrollPos > 100) {
+        setVisible(true);
+      } else {
+        setVisible(false);
+      }
+      
+      setPrevScrollPos(currentScrollPos);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [prevScrollPos]);
 
   const navigation = [
     { name: 'Home', href: '/' },
@@ -17,7 +38,9 @@ const Navbar = () => {
   return (
     <>
       <header 
-        className="fixed w-full z-50 bg-black/10 backdrop-blur-sm py-6"
+        className={`fixed w-full z-50 transition-all duration-300 ${
+          visible ? "bg-black/10 backdrop-blur-sm py-5 shadow-lg translate-y-0" : "py-6 -translate-y-full"
+        }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="relative flex items-center justify-between">
@@ -56,7 +79,7 @@ const Navbar = () => {
                 </Link>
               ))}
               <Link
-                to="/contact"
+                to="/#booking-widget"
                 className="ml-4 px-6 py-2 rounded-full text-sm font-semibold transition-all transform hover:scale-105 bg-white text-blue-900 hover:bg-white/90"
               >
                 Get Care Support
@@ -155,7 +178,7 @@ const Navbar = () => {
                 </div>
                 <div className="mt-6 pt-6 border-t border-gray-200">
                   <Link
-                    to="/contact"
+                    to="/#booking-widget"
                     className="block w-full px-6 py-3 text-center font-semibold text-white bg-gradient-to-r from-blue-600 to-blue-500 rounded-lg shadow-warm hover:shadow-warm-lg transition-all transform hover:scale-105"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >

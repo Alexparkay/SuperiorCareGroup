@@ -75,20 +75,36 @@ const Home = () => {
 
   const testimonials = [
     {
-      quote: "The compassionate care and genuine warmth shown by Superior Care Group has transformed my mother's life. Their person-centered approach means she's not just receiving care; she's thriving with dignity and independence.",
-      author: "Sarah Mitchell",
+      quote: "I wasn't sure about getting outside help at first, but my mum's carer Priya has been amazing! She remembers all the little things mum likes and even brings her favorite biscuits sometimes. It's not just about the care tasks - they've built a real connection.",
+      author: "Mei Lin Cheng",
       relation: "Daughter of Home Care Client",
-      image: "/images/testimonials/sarah-m.jpg",
+      image: "https://images.unsplash.com/photo-1557053815-9f79f70c7980?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&q=80",
       rating: 5,
       location: "Milton Keynes"
     },
     {
-      quote: "Superior Care Group has been exceptional in providing care for my father. Their professional team goes above and beyond to ensure he receives the best possible support while maintaining his independence.",
-      author: "David Wilson",
+      quote: "The carers looking after my dad have been a godsend. There was a mix-up with timing once, but they sorted it quickly and were really apologetic. Dad can be stubborn (!) but they know how to get him to take his meds without any fuss. Worth every penny for the peace of mind.",
+      author: "Rajiv Patel",
       relation: "Son of Home Care Client",
-      image: "/images/testimonials/david-w.jpg",
+      image: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&q=80",
       rating: 5,
       location: "Milton Keynes"
+    },
+    {
+      quote: "My aunt has dementia and gets confused easily. The SCG team has been so patient with her repeated questions and anxieties. They even helped sort out a plumbing issue once when I couldn't get there - totally beyond what they needed to do. Not perfect all the time (who is?), but genuinely caring people.",
+      author: "Sophia Nowak",
+      relation: "Niece of Dementia Care Client",
+      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&q=80",
+      rating: 4,
+      location: "Newport Pagnell"
+    },
+    {
+      quote: "Been using Superior Care for about 8 months now. Had to change carers once as the first one wasn't the right fit, but they listened to my concerns. Current team is brilliant - they don't rush through visits and actually take time to chat. The office sometimes takes a while to get back to you, but the care itself is top-notch.",
+      author: "Amir Hassan",
+      relation: "Home Care Client",
+      image: "https://images.unsplash.com/photo-1566753323558-f4e0952af115?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&q=80",
+      rating: 4,
+      location: "Bletchley"
     }
   ];
 
@@ -145,7 +161,7 @@ const Home = () => {
 
       <main className="overflow-hidden">
         {/* Hero Section with Video Background */}
-        <section className="relative min-h-screen flex items-end justify-start">
+        <section className="relative min-h-screen flex items-center justify-center">
           <div className="absolute inset-0">
             <video
               autoPlay
@@ -156,64 +172,79 @@ const Home = () => {
             >
               <source src="/videos/7522362-uhd_3840_2160_25fps.mp4" type="video/mp4" />
             </video>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
           </div>
           
-          <div className="relative w-full max-w-[95%] mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+          <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex flex-col items-center text-center">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-white max-w-xl ml-0"
+              transition={{ duration: 1 }}
+              className="text-white max-w-3xl"
             >
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-[1.1] drop-shadow-lg">
+              <div className="inline-block bg-blue-600/30 backdrop-blur-sm px-6 py-2 rounded-full mb-6 border border-blue-400/20">
+                <span className="text-lg font-medium text-white">CQC Registered Care Provider</span>
+              </div>
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight drop-shadow-xl">
                 Trusted Home Care
-                <span className="block text-blue-600 mt-2">That Feels Like Family</span>
+                <span className="block text-amber-400 mt-2">That Feels Like Family</span>
               </h1>
-              <p className="text-lg md:text-xl text-blue-100 mb-6 leading-relaxed max-w-lg drop-shadow-md">
-                CQC registered care services providing professional, 
-                compassionate support for you and your loved ones. 
+              <p className="text-xl md:text-2xl text-blue-100 mb-10 leading-relaxed max-w-2xl mx-auto drop-shadow-md">
+                Professional, compassionate support for you and your loved ones. 
                 Available 24/7 in Milton Keynes.
               </p>
-              <div className="flex flex-col sm:flex-row gap-6">
+              <div className="flex flex-col sm:flex-row gap-8 justify-center">
                 <a
-                  href="#booking-form"
-                  className="group relative overflow-hidden bg-gradient-to-r from-amber-400 to-amber-500 text-blue-900 px-8 py-4 rounded-lg font-semibold hover:from-amber-300 hover:to-amber-400 transform hover:scale-105 transition-all shadow-xl"
+                  href="#booking-widget"
+                  className="group relative overflow-hidden bg-gradient-to-r from-amber-400 to-amber-500 text-blue-900 px-10 py-5 rounded-full font-bold text-lg hover:from-amber-300 hover:to-amber-400 transform hover:scale-105 transition-all shadow-2xl"
                 >
                   <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
                   <div className="flex items-center justify-center relative z-10">
-                    <svg className="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-7 h-7 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                     <span>Book Free Care Assessment</span>
-                    <svg className="w-5 h-5 ml-2 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-6 h-6 ml-3 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                     </svg>
                   </div>
                 </a>
                 <a
                   href="tel:01908522245"
-                  className="bg-white/20 backdrop-blur-sm border border-white text-white px-6 py-3 rounded-full font-semibold text-base hover:bg-white/30 transition-all flex items-center justify-center"
+                  className="group relative overflow-hidden bg-white/10 backdrop-blur-sm border border-white/30 text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-white/20 transition-all flex items-center justify-center shadow-2xl"
                 >
-                  <svg className="w-5 h-5 mr-2 animate-pulse text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                  Call Us Now: 01908 522245
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-white/10 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
+                  <div className="flex items-center justify-center relative z-10">
+                    <svg className="w-7 h-7 mr-3 animate-pulse text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    <span>Call Us: 01908 522245</span>
+                  </div>
                 </a>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
-                {trustSignals.slice(0, 3).map((signal, index) => (
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.5 }}
+              className="grid grid-cols-3 gap-8 mt-20"
+            >
+              {trustSignals.map((signal, index) => (
                   <motion.div
                     key={signal.title}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 + 0.8 }}
+                  transition={{ duration: 0.5, delay: index * 0.2 + 1 }}
                     className="flex flex-col items-center text-center"
                   >
-                    {signal.icon}
-                    <h3 className="text-base font-semibold text-white mt-2">{signal.title}</h3>
+                  <div className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mb-3 shadow-lg">
+                    <div className="w-16 h-16 text-amber-400">{signal.icon}</div>
+                  </div>
+                  <h3 className="text-lg font-semibold text-white mb-1">{signal.title}</h3>
+                  <p className="text-sm text-blue-100">{signal.description}</p>
                   </motion.div>
                 ))}
-              </div>
             </motion.div>
           </div>
         </section>
@@ -243,7 +274,7 @@ const Home = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-blue-900/50 to-transparent" />
                 </div>
                 <div className="relative h-full flex flex-col justify-end p-8 text-white">
-                  <div className="text-5xl font-bold mb-2">12,000+</div>
+                  <div className="text-5xl font-bold mb-2">1,000+</div>
                   <div className="text-xl font-medium mb-2">Families Supported</div>
                   <p className="text-blue-100 text-sm">Trusted home care services delivered with compassion</p>
                 </div>
@@ -295,7 +326,7 @@ const Home = () => {
                 </div>
               </motion.div>
 
-              {/* 24/7 Care */}
+              {/* Carers Available */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -306,15 +337,15 @@ const Home = () => {
                 <div className="absolute inset-0">
                   <img
                     src="https://images.unsplash.com/photo-1584432810601-6c7f27d2362b?auto=format&fit=crop&q=80"
-                    alt="24/7 care availability"
+                    alt="Carers available"
                     className="w-full h-full object-cover brightness-75 group-hover:scale-110 transition-transform duration-700"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-blue-900/50 to-transparent" />
                 </div>
                 <div className="relative h-full flex flex-col justify-end p-8 text-white">
-                  <div className="text-5xl font-bold mb-2">24/7</div>
-                  <div className="text-xl font-medium mb-2">Care Available</div>
-                  <p className="text-blue-100 text-sm">Round-the-clock support when you need it</p>
+                  <div className="text-5xl font-bold mb-2">80+</div>
+                  <div className="text-xl font-medium mb-2">Carers Available</div>
+                  <p className="text-blue-100 text-sm">Throughout Milton Keynes & Greater Milton Keynes</p>
                 </div>
               </motion.div>
             </div>
@@ -393,60 +424,71 @@ const Home = () => {
         </section>
 
         {/* Services Section */}
-        <section className="py-20 bg-white">
+        <section className="py-32 bg-gradient-to-b from-white via-blue-50 to-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mb-16"
+              className="text-center mb-20"
             >
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Care Services</h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Professional care services tailored to your unique needs
+              <div className="flex items-center justify-center space-x-3 mb-4">
+                <div className="h-1 w-12 bg-amber-400 rounded-full"></div>
+                <span className="text-amber-600 font-medium uppercase tracking-wide text-sm">Tailored to Your Needs</span>
+                <div className="h-1 w-12 bg-amber-400 rounded-full"></div>
+              </div>
+              <h2 className="text-5xl font-bold text-gray-900 mb-6">Our Care Services</h2>
+              <p className="text-2xl text-gray-600 max-w-3xl mx-auto">
+                Professional care services personalized for your unique situation and requirements
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
               {services.map((service, index) => (
                 <motion.div
                   key={service.title}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white rounded-2xl overflow-hidden shadow-warm hover:shadow-warm-lg transition-all flex flex-col h-full transform hover:-translate-y-2 duration-300"
+                  transition={{ duration: 0.7, delay: index * 0.2 }}
+                  className="bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all flex flex-col h-full transform hover:-translate-y-3 duration-500 border border-gray-100"
                 >
-                  <div className="relative h-72 overflow-hidden">
+                  <div className="relative h-80 overflow-hidden group">
                     <img
                       src={service.image}
                       alt={service.title}
-                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                      className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 to-transparent flex items-end">
-                      <h3 className="text-2xl font-bold text-white p-6">{service.title}</h3>
+                    <div className="absolute inset-0 bg-gradient-to-t from-blue-900/90 via-blue-900/50 to-transparent flex items-end">
+                      <div className="p-8 w-full">
+                        <div className="flex items-center space-x-2 mb-3">
+                          <div className="h-1 w-8 bg-amber-400 rounded-full"></div>
+                          <span className="text-amber-300 text-sm font-medium uppercase tracking-wide">Superior Care</span>
+                        </div>
+                        <h3 className="text-3xl font-bold text-white">{service.title}</h3>
+                      </div>
                     </div>
                   </div>
-                  <div className="p-6 flex-grow flex flex-col">
-                    <p className="text-gray-600 mb-6 flex-grow">{service.description}</p>
-                    <div className="space-y-3 mb-6">
+                  <div className="p-8 flex-grow flex flex-col">
+                    <p className="text-gray-600 mb-8 text-lg flex-grow">{service.description}</p>
+                    <div className="space-y-4 mb-8">
                       {service.features.map((feature) => (
                         <div key={feature} className="flex items-center text-gray-700">
-                          <div className="flex-shrink-0 w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center mr-3">
-                            <svg className="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-4">
+                            <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                             </svg>
                           </div>
-                          <span>{feature}</span>
+                          <span className="text-lg">{feature}</span>
                         </div>
                       ))}
                     </div>
                     <Link
                       to={service.link}
-                      className="inline-flex items-center text-amber-600 hover:text-amber-700 font-medium"
+                      className="group inline-flex items-center text-blue-600 hover:text-blue-800 font-medium transition-all text-lg"
                     >
                       <span>Learn More</span>
-                      <svg className="w-5 h-5 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-6 h-6 ml-2 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                       </svg>
                     </Link>
@@ -461,56 +503,540 @@ const Home = () => {
         <section className="relative h-screen w-full overflow-hidden">
           {/* Full-screen video */}
           <div className="absolute inset-0 w-full h-full">
-            <VideoWidget
-              src={videos.find(v => v.section === 'home')?.src || '/videos/7522362-uhd_3840_2160_25fps.mp4'}
-              className="w-full h-full"
-            />
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-cover"
+            >
+              <source src="/videos/7517080-uhd_3840_2160_25fps.mp4" type="video/mp4" />
+            </video>
             {/* Overlay gradient for better text visibility */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/30"></div>
           </div>
           
           {/* Overlaid text positioned to the left */}
           <div className="relative h-full flex items-center">
-            <div className="max-w-[95%] mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
-                className="max-w-xl text-white"
+                className="max-w-2xl"
               >
-                <h2 className="text-5xl font-bold mb-6 leading-tight">
-                  See Our Care <span className="text-amber-400">in Action</span>
+                <div className="flex items-center space-x-3 mb-6">
+                  <div className="h-1 w-12 bg-amber-400 rounded-full"></div>
+                  <span className="text-amber-400 font-medium uppercase tracking-wide text-sm">Care that transforms lives</span>
+                </div>
+                <h2 className="text-6xl font-bold mb-6 leading-tight text-white">
+                  Compassionate Care <br/>
+                  <span className="text-amber-400">In Action</span>
                 </h2>
                 <p className="text-xl text-blue-100 mb-8 leading-relaxed">
-                  Experience the Superior Care Group difference through our compassionate, 
-                  professional services that transform lives every day.
+                  See the Superior Care Group difference through our personalized, 
+                  attentive services that make a real difference every day.
                 </p>
-                <Link
-                  to="/contact"
-                  className="inline-block bg-gradient-to-r from-amber-400 to-amber-500 text-blue-900 px-6 py-3 rounded-lg font-semibold hover:from-amber-300 hover:to-amber-400 transform hover:scale-105 transition-all shadow-lg"
-                >
-                  Book a Free Assessment
-                </Link>
+                
+                {/* Animated FAQ section */}
+                <div className="mt-10 w-full max-w-xl">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="relative h-[200px]" // Increased height for larger text
+                  >
+                    {/* First FAQ - Shows for 10 seconds (0-10s mark) */}
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ 
+                        opacity: [0, 1, 1, 0],
+                      }}
+                      transition={{
+                        duration: 10,
+                        times: [0, 0.1, 0.9, 1],
+                        repeat: Infinity,
+                        repeatDelay: 40,
+                      }}
+                      className="absolute inset-0"
+                    >
+                      <div className="mb-3">
+                        <div className="bg-white/10 backdrop-blur-sm px-6 py-3 rounded-lg inline-block">
+                          <p className="text-amber-300 font-medium text-xl">Can I choose specific times for care visits?</p>
+                        </div>
+                      </div>
+                      <div className="bg-white/5 backdrop-blur-sm px-6 py-5 rounded-xl max-w-lg">
+                        <p className="text-white text-xl leading-relaxed">
+                          Yes! We work around your schedule to ensure care is delivered when you need it most. 
+                          Our team collaborates with you to create a personalized timetable that suits your routine.
+                        </p>
+                      </div>
+                    </motion.div>
+                    
+                    {/* Second FAQ - Shows for 10 seconds (10-20s mark) */}
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ 
+                        opacity: [0, 0, 0, 1, 1, 0],
+                      }}
+                      transition={{
+                        duration: 60,
+                        times: [0, 0.165, 0.166, 0.175, 0.32, 0.33],
+                        repeat: Infinity,
+                      }}
+                      className="absolute inset-0"
+                    >
+                      <div className="mb-3">
+                        <div className="bg-white/10 backdrop-blur-sm px-6 py-3 rounded-lg inline-block">
+                          <p className="text-amber-300 font-medium text-xl">How quickly can care be arranged?</p>
+                        </div>
+                      </div>
+                      <div className="bg-white/5 backdrop-blur-sm px-6 py-5 rounded-xl max-w-lg">
+                        <p className="text-white text-xl leading-relaxed">
+                          We can often arrange care within 24-48 hours in urgent situations. 
+                          Our streamlined assessment process ensures we understand your needs 
+                          and match you with the right carer promptly.
+                        </p>
+                      </div>
+                    </motion.div>
+                    
+                    {/* Third FAQ - Shows for 10 seconds (20-30s mark) */}
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ 
+                        opacity: [0, 0, 0, 0, 0, 1, 1, 0],
+                      }}
+                      transition={{
+                        duration: 60,
+                        times: [0, 0.32, 0.33, 0.33, 0.33, 0.34, 0.49, 0.5],
+                        repeat: Infinity,
+                      }}
+                      className="absolute inset-0"
+                    >
+                      <div className="mb-3">
+                        <div className="bg-white/10 backdrop-blur-sm px-6 py-3 rounded-lg inline-block">
+                          <p className="text-amber-300 font-medium text-xl">Will I have the same carer each time?</p>
+                        </div>
+                      </div>
+                      <div className="bg-white/5 backdrop-blur-sm px-6 py-5 rounded-xl max-w-lg">
+                        <p className="text-white text-xl leading-relaxed">
+                          Continuity of care is one of our priorities. We assign a small, consistent 
+                          team of carers to each client, allowing for genuine relationships to develop 
+                          while ensuring reliable coverage during holidays and illness.
+                        </p>
+                      </div>
+                    </motion.div>
+                    
+                    {/* Fourth FAQ - Shows for 10 seconds (30-40s mark) */}
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ 
+                        opacity: [0, 0, 0, 0, 0, 0, 0, 1, 1, 0],
+                      }}
+                      transition={{
+                        duration: 60,
+                        times: [0, 0.49, 0.5, 0.5, 0.5, 0.5, 0.5, 0.51, 0.66, 0.67],
+                        repeat: Infinity,
+                      }}
+                      className="absolute inset-0"
+                    >
+                      <div className="mb-3">
+                        <div className="bg-white/10 backdrop-blur-sm px-6 py-3 rounded-lg inline-block">
+                          <p className="text-amber-300 font-medium text-xl">What if my care needs change over time?</p>
+                        </div>
+                      </div>
+                      <div className="bg-white/5 backdrop-blur-sm px-6 py-5 rounded-xl max-w-lg">
+                        <p className="text-white text-xl leading-relaxed">
+                          Our care plans are flexible and regularly reviewed. As your needs evolve, 
+                          we adapt our services accordingly—whether you need to increase hours, 
+                          add specialized care, or reduce support as you regain independence.
+                        </p>
+                      </div>
+                    </motion.div>
+                    
+                    {/* Fifth FAQ - Shows for 10 seconds (40-50s mark) */}
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ 
+                        opacity: [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0],
+                      }}
+                      transition={{
+                        duration: 60,
+                        times: [0, 0.66, 0.67, 0.67, 0.67, 0.67, 0.67, 0.67, 0.67, 0.68, 0.83, 0.84],
+                        repeat: Infinity,
+                      }}
+                      className="absolute inset-0"
+                    >
+                      <div className="mb-3">
+                        <div className="bg-white/10 backdrop-blur-sm px-6 py-3 rounded-lg inline-block">
+                          <p className="text-amber-300 font-medium text-xl">Can I meet my carer before service begins?</p>
+                        </div>
+                      </div>
+                      <div className="bg-white/5 backdrop-blur-sm px-6 py-5 rounded-xl max-w-lg">
+                        <p className="text-white text-xl leading-relaxed">
+                          Absolutely. We arrange introductory meetings before care starts so you can get to know 
+                          your carer in a relaxed setting. This helps establish comfort and trust 
+                          from the very beginning of your care journey.
+                        </p>
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                </div>
               </motion.div>
             </div>
           </div>
         </section>
 
-        {/* Lead Magnet Section */}
-        <section className="py-20 bg-white">
-          <div className="max-w-[95%] mx-auto px-2 sm:px-4 lg:px-6">
-            <div className="bg-blue-900 text-white rounded-2xl p-8 md:p-12 shadow-xl">
+        {/* Testimonials Section */}
+        <section className="py-24 bg-gradient-to-b from-gray-100 to-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <div className="flex items-center justify-center space-x-3 mb-4">
+                <div className="h-1 w-10 bg-amber-400 rounded-full"></div>
+                <span className="text-amber-600 font-medium uppercase tracking-wide text-sm">Real Voices, Real Experiences</span>
+                <div className="h-1 w-10 bg-amber-400 rounded-full"></div>
+              </div>
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">What Families Say</h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Authentic experiences shared by families who've trusted us with their care needs
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
+              {testimonials.map((testimonial, index) => (
+                <motion.div
+                  key={testimonial.author}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.2 }}
+                  className="bg-white rounded-xl p-8 relative shadow-warm hover:shadow-xl transition-all border border-gray-100"
+                >
+                  <div className="flex items-start gap-6">
+                    <img
+                      src={testimonial.image}
+                      alt={testimonial.author}
+                      className="w-20 h-20 rounded-full object-cover ring-4 ring-blue-100 shadow-md"
+                    />
+                    <div>
+                      <div className="flex items-center mb-2">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <svg
+                            key={i}
+                            className="w-5 h-5 text-amber-500"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                          </svg>
+                        ))}
+                        {testimonial.rating < 5 && [...Array(5 - testimonial.rating)].map((_, i) => (
+                          <svg
+                            key={i + testimonial.rating}
+                            className="w-5 h-5 text-gray-300"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                          </svg>
+                        ))}
+                        <span className="ml-2 text-sm text-gray-500">
+                          {testimonial.rating === 5 ? "Excellent" : testimonial.rating === 4 ? "Very Good" : "Good"}
+                        </span>
+                      </div>
+                      <svg className="w-10 h-10 text-amber-200 absolute top-6 right-8" fill="currentColor" viewBox="0 0 32 32">
+                        <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+                      </svg>
+                      <p className="text-gray-600 mb-4 text-lg italic">{testimonial.quote}</p>
+                      <div className="flex justify-between items-end">
+                        <div>
+                      <p className="font-semibold text-gray-900">{testimonial.author}</p>
+                      <p className="text-sm text-blue-600">{testimonial.relation}</p>
+                        </div>
+                        <div className="flex items-center text-amber-600 text-sm">
+                          <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                          </svg>
+                          {testimonial.location}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+            
+            <div className="flex justify-center items-center space-x-6">
+              <div className="flex -space-x-4">
+                {testimonials.map((testimonial, index) => (
+                  <img 
+                    key={index}
+                    src={testimonial.image} 
+                    alt="Client" 
+                    className="w-12 h-12 rounded-full border-2 border-white object-cover shadow-md"
+                  />
+                ))}
+                <div className="w-12 h-12 rounded-full bg-amber-400 flex items-center justify-center border-2 border-white text-blue-900 font-bold text-xs shadow-md">30+</div>
+              </div>
+              <p className="text-lg text-gray-700">Join the <span className="font-semibold">1,000+ families</span> who trust Superior Care Group</p>
+              <Link
+                to="/contact"
+                className="inline-flex items-center px-6 py-3 rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 transition-all shadow-md hover:shadow-lg"
+              >
+                <span>Read More Reviews</span>
+                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section id="booking-widget" className="relative py-28 bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700 text-white overflow-hidden">
+          {/* Decorative elements */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-blue-600/20 blur-3xl"></div>
+            <div className="absolute top-1/2 right-0 w-80 h-80 rounded-full bg-blue-500/20 blur-3xl"></div>
+            <div className="absolute bottom-0 left-1/3 w-64 h-64 rounded-full bg-blue-400/20 blur-3xl"></div>
+          </div>
+          
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col lg:flex-row gap-16 items-center justify-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+                className="max-w-xl text-center lg:text-left"
+              >
+                <h2 className="text-5xl md:text-6xl font-bold mb-8 leading-tight">Ready to Experience <span className="text-amber-400">Genuine Care?</span></h2>
+                <p className="text-xl text-blue-100 mb-8">
+                  Our dedicated team is ready to provide exceptional care tailored to your unique needs. 
+                  Let us help you or your loved one live with dignity, comfort, and joy.
+                </p>
+                
+                <div className="mt-12 flex items-center space-x-4 justify-center lg:justify-start">
+                  <div className="flex -space-x-4">
+                    <img src="https://images.unsplash.com/photo-1557053815-9f79f70c7980?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&q=80" alt="Client" className="w-12 h-12 rounded-full border-2 border-blue-600 object-cover" />
+                    <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&q=80" alt="Client" className="w-12 h-12 rounded-full border-2 border-blue-600 object-cover" />
+                    <div className="w-12 h-12 rounded-full bg-amber-400 flex items-center justify-center border-2 border-blue-600 text-blue-900 font-bold text-xs">15+</div>
+                  </div>
+                  <p className="text-blue-100">Join over <span className="font-bold text-white">1,000 families</span> who trust Superior Care Group</p>
+                </div>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 shadow-2xl w-full max-w-xl"
+              >
+                <div className="bg-gradient-to-br from-amber-400 to-amber-500 -mt-16 rounded-xl p-6 shadow-lg">
+                  <h3 className="text-blue-900 font-bold text-2xl">Book Your Free Assessment</h3>
+                  <p className="text-blue-900/70">Complete this short form to get started with your care journey</p>
+                </div>
+                
+                <form className="mt-8 space-y-5">
+                  <div className="grid grid-cols-2 gap-5">
+                    <div>
+                      <label className="block text-white text-sm font-medium mb-2">First Name</label>
+                      <input 
+                        type="text"
+                        className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-amber-400"
+                        placeholder="First name"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-white text-sm font-medium mb-2">Last Name</label>
+                      <input 
+                        type="text"
+                        className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-amber-400"
+                        placeholder="Last name"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-5">
+                    <div>
+                      <label className="block text-white text-sm font-medium mb-2">Phone Number</label>
+                      <input 
+                        type="tel"
+                        className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-amber-400"
+                        placeholder="Your phone number"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-white text-sm font-medium mb-2">Email Address</label>
+                      <input 
+                        type="email"
+                        className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-amber-400"
+                        placeholder="Your email"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <label className="block text-white text-sm font-medium mb-2">Type of Care Needed</label>
+                    <select className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-400">
+                      <option value="" className="bg-blue-800">Select care type</option>
+                      <option value="home-care" className="bg-blue-800">Home Care</option>
+                      <option value="community-care" className="bg-blue-800">Community Care</option>
+                      <option value="learning-disabilities" className="bg-blue-800">Learning Disabilities Support</option>
+                      <option value="mental-health" className="bg-blue-800">Mental Health Support</option>
+                    </select>
+                  </div>
+                  
+                  <div>
+                    <label className="block text-white text-sm font-medium mb-2">Additional Information</label>
+                    <textarea 
+                      className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-amber-400"
+                      placeholder="Please tell us about your care needs..."
+                      rows={3}
+                    ></textarea>
+                  </div>
+                  
+                  <button
+                    type="submit"
+                    className="w-full bg-gradient-to-r from-amber-400 to-amber-500 text-blue-900 py-4 px-6 rounded-lg font-bold text-lg hover:from-amber-300 hover:to-amber-400 transform hover:scale-105 transition-all shadow-lg mt-4 flex items-center justify-center"
+                >
+                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                    Book My Free Assessment
+                  </button>
+                  
+                  <div className="flex items-center justify-center space-x-4 text-sm text-center text-blue-100 pt-2">
+                    <div className="flex items-center">
+                      <svg className="w-5 h-5 mr-1 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                      <span>Secure & Confidential</span>
+              </div>
+                    <div className="flex items-center">
+                      <svg className="w-5 h-5 mr-1 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span>24hr Response</span>
+                    </div>
+                  </div>
+                </form>
+            </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Authority Section */}
+        <section className="py-20 bg-gradient-to-b from-white to-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <div className="flex items-center justify-center space-x-3 mb-4">
+                <div className="h-1 w-10 bg-amber-400 rounded-full"></div>
+                <span className="text-amber-600 font-medium uppercase tracking-wide text-sm">Industry Leadership</span>
+                <div className="h-1 w-10 bg-amber-400 rounded-full"></div>
+              </div>
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">Recognized Excellence in Care</h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Trusted by care professionals, families, and healthcare partners
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="bg-white rounded-xl p-8 shadow-warm border border-gray-100"
+              >
+                <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+                  <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">CQC Regulated</h3>
+                <p className="text-gray-600 mb-4">
+                  Our services are regularly inspected and regulated by the Care Quality Commission, ensuring we maintain the highest standards of care.
+                </p>
+                <a href="#" className="text-blue-600 hover:text-blue-800 inline-flex items-center font-medium">
+                  View Our CQC Rating
+                  <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="bg-white rounded-xl p-8 shadow-warm border border-gray-100"
+              >
+                <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+                  <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">NHS Approved Provider</h3>
+                <p className="text-gray-600 mb-4">
+                  We work in partnership with the NHS and local authorities to deliver continuing healthcare and reablement services across Milton Keynes.
+                </p>
+                <a href="#" className="text-blue-600 hover:text-blue-800 inline-flex items-center font-medium">
+                  Our Healthcare Partnerships
+                  <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+                className="bg-white rounded-xl p-8 shadow-warm border border-gray-100"
+              >
+                <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+                  <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                  </svg>
+                  </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">Award-Winning Training</h3>
+                <p className="text-gray-600 mb-4">
+                  Our care professionals undergo industry-leading training programs, including specialized dementia care, end of life care, and medication management.
+                </p>
+                <a href="#" className="text-blue-600 hover:text-blue-800 inline-flex items-center font-medium">
+                  Our Training Standards
+                  <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </motion.div>
+            </div>
+
+            <div className="bg-blue-900 text-white rounded-2xl p-8 shadow-xl">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 <div>
-                  <h2 className="text-3xl font-bold mb-4">
+                  <h2 className="text-2xl font-bold mb-4">
                     Download Our Free Care Guide
                   </h2>
                   <p className="text-blue-100 mb-6">
                     Get expert advice on choosing the right care service for your loved one.
                     Our comprehensive guide includes:
                   </p>
-                  <ul className="space-y-3 text-blue-100 mb-8">
+                  <ul className="space-y-3 text-blue-100 mb-4">
                     <li className="flex items-center">
                       <svg className="w-5 h-5 text-amber-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -531,26 +1057,26 @@ const Home = () => {
                     </li>
                   </ul>
                 </div>
-                <div className="bg-white text-gray-900 p-6 rounded-xl shadow-lg">
-                  <form className="space-y-4">
+                <div className="bg-white text-gray-900 p-5 rounded-xl shadow-lg">
+                  <form className="space-y-3">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                      <label htmlFor="guide-name" className="block text-sm font-medium text-gray-700">
                         Full Name
                       </label>
                       <input
                         type="text"
-                        id="name"
+                        id="guide-name"
                         name="name"
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-800 focus:ring-blue-800"
                       />
                     </div>
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                      <label htmlFor="guide-email" className="block text-sm font-medium text-gray-700">
                         Email Address
                       </label>
                       <input
                         type="email"
-                        id="email"
+                        id="guide-email"
                         name="email"
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500"
                       />
@@ -571,260 +1097,9 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Testimonials Section */}
-        <section className="py-20 bg-white">
-          <div className="max-w-[95%] mx-auto px-2 sm:px-4 lg:px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">What Families Say</h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Real experiences from families who've trusted us with their care needs
-              </p>
-            </motion.div>
+      </main>
+    </>
+  );
+};
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              {testimonials.map((testimonial, index) => (
-                <motion.div
-                  key={testimonial.author}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.2 }}
-                  className="bg-white rounded-xl p-8 relative shadow-warm"
-                >
-                  <div className="flex items-start gap-6">
-                    <img
-                      src={testimonial.image}
-                      alt={testimonial.author}
-                      className="w-16 h-16 rounded-full object-cover ring-4 ring-blue-200"
-                    />
-                    <div>
-                      <div className="flex items-center mb-2">
-                        {[...Array(testimonial.rating)].map((_, i) => (
-                          <svg
-                            key={i}
-                            className="w-5 h-5 text-blue-800"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                        ))}
-                      </div>
-                      <svg className="w-12 h-12 text-amber-200 absolute top-6 right-8" fill="currentColor" viewBox="0 0 32 32">
-                        <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
-                      </svg>
-                      <p className="text-gray-600 mb-4 text-lg italic">{testimonial.quote}</p>
-                      <p className="font-semibold text-gray-900">{testimonial.author}</p>
-                      <p className="text-sm text-blue-600">{testimonial.relation}</p>
-                      <p className="text-sm text-amber-600">{testimonial.location}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="relative py-24 bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700 text-white overflow-hidden">
-          {/* Decorative elements */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-blue-600/20 blur-3xl"></div>
-            <div className="absolute top-1/2 right-0 w-80 h-80 rounded-full bg-blue-500/20 blur-3xl"></div>
-            <div className="absolute bottom-0 left-1/3 w-64 h-64 rounded-full bg-blue-400/20 blur-3xl"></div>
-          </div>
-          
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="max-w-3xl mx-auto"
-            >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Experience Genuine Care?</h2>
-              <p className="text-xl text-blue-100 mb-12 max-w-2xl mx-auto">
-                Book your free care assessment today and discover how we can support you or your loved one
-                with professional, compassionate care.
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
-                <a
-                  href="#booking-form"
-                  className="bg-gradient-to-r from-amber-400 to-amber-500 text-blue-900 px-8 py-4 rounded-lg font-semibold hover:from-amber-300 hover:to-amber-400 transform hover:scale-105 transition-all shadow-lg flex items-center justify-center"
-                >
-                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                  Book Free Assessment
-                </a>
-                <a
-                  href="tel:01908522245"
-                  className="bg-white/20 backdrop-blur-sm border border-white/40 text-white px-8 py-4 rounded-lg font-semibold hover:bg-white/30 transition-all flex items-center justify-center"
-                >
-                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                  Call: 01908 522245
-                </a>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Booking Form Widget Section */}
-        <section id="booking-form" className="py-20 bg-gradient-to-b from-white to-amber-50">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-12"
-            >
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">Book Your Free Assessment</h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                Tell us about your care needs and we'll be in touch within 24 hours
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="bg-white rounded-xl shadow-warm overflow-hidden"
-            >
-              <div className="p-8">
-                <motion.form
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 }}
-                  className="space-y-6"
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    // Handle form submission
-                    alert("Thank you for your inquiry. Our care team will contact you within 24 hours.");
-                  }}
-                >
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="homeFirstName" className="block text-sm font-medium text-gray-700 mb-1">
-                        First Name
-                      </label>
-                      <input
-                        type="text"
-                        id="homeFirstName"
-                        name="firstName"
-                        required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="homeLastName" className="block text-sm font-medium text-gray-700 mb-1">
-                        Last Name
-                      </label>
-                      <input
-                        type="text"
-                        id="homeLastName"
-                        name="lastName"
-                        required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                      />
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="homeEmail" className="block text-sm font-medium text-gray-700 mb-1">
-                        Email Address
-                      </label>
-                      <input
-                        type="email"
-                        id="homeEmail"
-                        name="email"
-                        required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="homePhone" className="block text-sm font-medium text-gray-700 mb-1">
-                        Phone Number
-                      </label>
-                      <input
-                        type="tel"
-                        id="homePhone"
-                        name="phone"
-                        required
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label htmlFor="homeService" className="block text-sm font-medium text-gray-700 mb-1">
-                      Type of Care Needed
-                    </label>
-                    <select
-                      id="homeService"
-                      name="service"
-                      required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                    >
-                      <option value="">Select Care Type</option>
-                      <option value="home-care">Home Care</option>
-                      <option value="community-care">Community Care</option>
-                      <option value="learning-disabilities">Learning Disabilities Support</option>
-                      <option value="mental-health">Mental Health Support</option>
-                      <option value="not-sure">Not Sure / Need Advice</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label htmlFor="homeMessage" className="block text-sm font-medium text-gray-700 mb-1">
-                      Additional Information
-                    </label>
-                    <textarea
-                      id="homeMessage"
-                      name="message"
-                      rows={3}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500"
-                      placeholder="Please tell us about your care needs..."
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="w-full bg-gradient-to-r from-amber-400 to-amber-500 text-blue-900 py-3 px-6 rounded-lg font-semibold hover:from-amber-300 hover:to-amber-400 transform hover:scale-105 transition-all shadow-warm"
-                  >
-                    Submit Request
-                  </button>
-                  <p className="text-sm text-gray-500 text-center">
-                    We'll respond to your inquiry within 24 hours
-                  </p>
-                </motion.form>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* CQC Widget Section */}
-        <section className="py-16 bg-white">
-          <div className="max-w-[95%] mx-auto px-2 sm:px-4 lg:px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-10"
-            >
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">CQC Registered Provider</h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                We are fully registered with the Care Quality Commission
-              </p>
-            </motion.div>
-            <div className="flex justify-center">
-              <div className="cqc-widget bg-white shadow-lg rounded-lg p-6 w-full max-w-2xl">
-                <div 
-                  id="cqc-widget-placeholder" 
-                  data-id="1-392755073" 
-                  data-host="https://www.cqc.org.uk" 
-      
+export default Home; 
