@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Superior Care Group provides professional home care and community care services across Milton Keynes, Devon, and London. Our experienced team delivers compassionate, person-centered care." />
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <title>Superior Care Group | Professional Home Care & Community Support Services</title>
+    <style>
+      /* Fallback styles in case CSS doesn't load */
+      .loading-fallback {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        font-family: 'Inter', sans-serif;
+        text-align: center;
+        padding: 20px;
+      }
+      .loading-fallback h1 {
+        font-size: 24px;
+        margin-bottom: 16px;
+      }
+      .loading-fallback p {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <!-- Fallback content if JavaScript fails to load -->
+      <div class="loading-fallback">
+        <h1>Superior Care Group</h1>
+        <p>Loading our care services website...</p>
+        <noscript>
+          <p style="color: #e53e3e;">JavaScript is required to view this website. Please enable JavaScript in your browser settings.</p>
+        </noscript>
+      </div>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- CQC Widget Script - loaded with defer to prevent blocking -->
+    <script type="text/javascript" src="https://www.cqc.org.uk/sites/all/modules/custom/cqc_widget/widget.js" defer></script>
+  </body>
+</html>
