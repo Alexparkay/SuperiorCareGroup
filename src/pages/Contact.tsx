@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 const Contact = () => {

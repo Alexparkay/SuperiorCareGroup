@@ -7,7 +7,7 @@ import { videos } from '../config/videos';
 import { images } from '../config/images';
 
 const AboutUs = () => {
-  const [selectedMember, setSelectedMember] = useState<number | null>(null);
+  // const [selectedMember, setSelectedMember] = useState<number | null>(null);
   const [activeValue, setActiveValue] = useState<string | null>(null);
   const [showStoryModal, setShowStoryModal] = useState(false);
   

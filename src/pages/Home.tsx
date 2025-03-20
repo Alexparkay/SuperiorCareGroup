@@ -2,8 +2,6 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useEffect } from 'react';
-import VideoWidget from '../components/VideoWidget';
-import { videos } from '../config/videos';
 
 // Declare the CQCWidget type for TypeScript
 declare global {
@@ -136,13 +134,6 @@ const Home = () => {
       title: "Medication Certified",
       description: "Qualified to manage and administer medications"
     }
-  ];
-
-  const impactStats = [
-    { number: "1,200+", label: "Families Supported", description: "Trusted home care services delivered" },
-    { number: "98%", label: "Client Satisfaction", description: "Person-centered care excellence" },
-    { number: "15+", label: "Years of Experience", description: "Professional care expertise" },
-    { number: "24/7", label: "Care Available", description: "Round-the-clock support" }
   ];
 
   return (
