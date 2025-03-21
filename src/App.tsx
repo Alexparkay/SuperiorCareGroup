@@ -42,7 +42,7 @@ function FooterWrapper() {
 
 function App() {
   return (
-    <Router basename="/">
+    <Router>
       <div className="flex flex-col min-h-screen bg-gray-50">
         <ErrorBoundary fallback={<div className="p-4 bg-red-100 text-red-800">Navigation error. Please refresh the page.</div>}>
           <Navbar />

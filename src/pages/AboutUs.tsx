@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import VideoWidget from '../components/VideoWidget';
 import { videos } from '../config/videos';
 import { images } from '../config/images';
@@ -12,25 +12,26 @@ const AboutUs = () => {
   const [showStoryModal, setShowStoryModal] = useState(false);
   const [showGallery, setShowGallery] = useState(false);
   const [activeImage, setActiveImage] = useState<number>(0);
+  const [familyPortrait, setFamilyPortrait] = useState<number>(0);
 
   const familyPortraits = [
     {
-      src: images.team.leadership,
+      src: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80",
       alt: "The Basi Family Leadership",
       caption: "Leadership with vision and compassion"
     },
     {
-      src: images.team.support,
+      src: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&q=80",
       alt: "Multi-generational Family Business",
       caption: "Three generations of exceptional care"
     },
     {
-      src: images.team.caregivers, 
+      src: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80", 
       alt: "Superior Care Team",
       caption: "A legacy of professional care"
     },
     {
-      src: images.services.personalCare,
+      src: "https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?auto=format&fit=crop&q=80",
       alt: "Family-led Care",
       caption: "Care that feels like family"
     }
@@ -98,24 +99,45 @@ const AboutUs = () => {
 
   const galleryImages = [
     {
-      src: images.team.caregivers,
+      src: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80",
       alt: "Care team meeting",
       caption: "Our dedicated care team"
     },
     {
-      src: images.team.leadership,
+      src: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&q=80",
       alt: "Client interaction",
       caption: "Building meaningful relationships"
     },
     {
-      src: images.careers.training,
+      src: "https://images.unsplash.com/photo-1585845328103-dca52cbb9a89?auto=format&fit=crop&q=80",
       alt: "Training session",
       caption: "Continuous professional development"
     },
     {
-      src: images.communitySupport.socialIntegration,
+      src: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=80",
       alt: "Community event",
       caption: "Community engagement"
+    }
+  ];
+
+  const testimonials = [
+    {
+      quote: "The care and attention my mother receives is exceptional. The team truly treats her like family.",
+      author: "Sarah Johnson",
+      role: "Daughter of Client",
+      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80"
+    },
+    {
+      quote: "Working for Superior Care Group feels like being part of a family. The support and training are outstanding.",
+      author: "Michael Chen",
+      role: "Care Professional",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80"
+    },
+    {
+      quote: "Their commitment to quality care and family values sets them apart. I couldn't be happier with their service.",
+      author: "David Thompson",
+      role: "Client",
+      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80"
     }
   ];
 

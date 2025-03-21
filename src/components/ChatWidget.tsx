@@ -1,9 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// Email address for contact
-const CONTACT_EMAIL = 'info@superiorcaregroup.co.uk';
-
 interface Message {
   id: number;
   text: string;
@@ -58,7 +55,7 @@ const ChatWidget = () => {
       try {
         // In a real implementation, you would make an API call to your backend
         // For now, we'll simulate sending the email with a console log
-        console.log(`Sending message to ${CONTACT_EMAIL}: ${newMessage}`);
+        console.log(`Sending message to info@superiorcaregroup.co.uk: ${newMessage}`);
         
         // Add system response
         setTimeout(() => {
@@ -184,7 +181,7 @@ const ChatWidget = () => {
                 </button>
               </div>
               <p className="text-xs text-gray-500 mt-2">
-                Messages will be sent to our team at {CONTACT_EMAIL}
+                Messages will be sent to our team at info@superiorcaregroup.co.uk
               </p>
             </form>
           </motion.div>
