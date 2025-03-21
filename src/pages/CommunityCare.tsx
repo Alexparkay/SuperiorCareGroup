@@ -155,7 +155,7 @@ const CommunityCare = () => {
     wellbeing: {
       title: "Holistic Wellbeing",
       content: "Your overall wellbeing is our priority. Our approach addresses physical, emotional, and mental health needs through comprehensive support services designed to enhance quality of life.",
-      image: "https://images.unsplash.com/photo-1585845328103-dca52cbb9a89?auto=format&fit=crop&q=80",
+      image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&q=80",
       features: [
         "Physical health and activity support",
         "Emotional and mental wellbeing services",

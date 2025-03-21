@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet';
 import VideoWidget from '../components/VideoWidget';
 import { videos } from '../config/videos';
 import { images } from '../config/images';
+import { sendFormToWebhook } from '../utils/formHandler';
 
 const Careers = () => {
   const [selectedJob, setSelectedJob] = useState<string | null>(null);
@@ -737,6 +738,25 @@ const Careers = () => {
                     onSubmit={(e) => {
                       e.preventDefault();
                       // Handle form submission
+                      const form = e.target as HTMLFormElement;
+                      const formData = new FormData(form);
+                      
+                      // Send the form data to the webhook
+                      sendFormToWebhook(formData, 'careers')
+                        .then(response => {
+                          if (response.ok) {
+                            // Reset form on success
+                            form.reset();
+                            // You could add a success message here
+                            alert('Thank you for your application. We will review it and contact you soon!');
+                          } else {
+                            alert('There was an error submitting your application. Please try again later.');
+                          }
+                        })
+                        .catch(error => {
+                          console.error('Form submission error:', error);
+                          alert('There was an error submitting your application. Please try again later.');
+                        });
                     }}
                   >
                     <div className="mb-8">

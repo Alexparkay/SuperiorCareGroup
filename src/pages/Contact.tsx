@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet';
 import { useEffect } from 'react';
+import { sendFormToWebhook } from '../utils/formHandler';
 
 const Contact = () => {
   // Prevent scrolling on this page
@@ -120,6 +121,25 @@ const Contact = () => {
                 onSubmit={(e) => {
                   e.preventDefault();
                   // Handle form submission
+                  const form = e.target as HTMLFormElement;
+                  const formData = new FormData(form);
+                  
+                  // Send the form data to the webhook
+                  sendFormToWebhook(formData, 'contact')
+                    .then(response => {
+                      if (response.ok) {
+                        // Reset form on success
+                        form.reset();
+                        // You could add a success message here
+                        alert('Thank you for your inquiry. We will contact you soon!');
+                      } else {
+                        alert('There was an error submitting the form. Please try again later.');
+                      }
+                    })
+                    .catch(error => {
+                      console.error('Form submission error:', error);
+                      alert('There was an error submitting the form. Please try again later.');
+                    });
                 }}
               >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { sendChatMessageToWebhook } from '../utils/chatHandler';
 
 interface Message {
   id: number;
@@ -12,6 +13,8 @@ const ChatWidget = () => {
   // Add error state to handle any issues
   const [error, setError] = useState<Error | null>(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [userEmail, setUserEmail] = useState('');
+  const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
@@ -34,10 +37,26 @@ const ChatWidget = () => {
     }
   }, [messages]);
 
+  const handleEmailSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (userEmail.trim() && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userEmail)) {
+      setEmailSubmitted(true);
+      
+      // Add system message acknowledging email
+      const systemResponse: Message = {
+        id: messages.length + 1,
+        text: `Thanks! We'll reply to ${userEmail}. How can we help you today?`,
+        sender: 'system',
+        timestamp: new Date(),
+      };
+      setMessages(prevMessages => [...prevMessages, systemResponse]);
+    }
+  };
+
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!newMessage.trim()) return;
+    if (!newMessage.trim() || !emailSubmitted) return;
     
     try {
       // Add user message to chat
@@ -51,18 +70,29 @@ const ChatWidget = () => {
       setMessages([...messages, userMessage]);
       setNewMessage('');
       
-      // Send message to email (in a real implementation, this would be an API call)
+      // Send message to email and webhook
       try {
         // In a real implementation, you would make an API call to your backend
         // For now, we'll simulate sending the email with a console log
-        console.log(`Sending message to info@superiorcaregroup.co.uk: ${newMessage}`);
+        console.log(`Sending message to info@superiorcaregroup.co.uk: ${newMessage} from ${userEmail}`);
+        
+        // Send the message to the webhook
+        sendChatMessageToWebhook(userMessage, userEmail)
+          .then(response => {
+            if (!response.ok) {
+              console.error('Failed to send message to webhook');
+            }
+          })
+          .catch(error => {
+            console.error('Error sending message to webhook:', error);
+          });
         
         // Add system response
         setTimeout(() => {
           try {
             const systemResponse: Message = {
               id: messages.length + 2,
-              text: 'Thank you for your message. We have received it and will get back to you shortly.',
+              text: 'Thank you for your message. We have received it and will get back to you shortly at your email address.',
               sender: 'system',
               timestamp: new Date(),
             };
@@ -161,29 +191,57 @@ const ChatWidget = () => {
               <div ref={messagesEndRef} />
             </div>
 
-            {/* Chat Input */}
-            <form onSubmit={handleSendMessage} className="border-t border-gray-200 p-4">
-              <div className="flex">
-                <input
-                  type="text"
-                  value={newMessage}
-                  onChange={(e) => setNewMessage(e.target.value)}
-                  placeholder="Type your message..."
-                  className="flex-1 border border-gray-300 rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
+            {/* Email Collection or Chat Input */}
+            {!emailSubmitted ? (
+              <form onSubmit={handleEmailSubmit} className="border-t border-gray-200 p-4">
+                <div className="mb-3">
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                    Your Email Address
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    value={userEmail}
+                    onChange={(e) => setUserEmail(e.target.value)}
+                    placeholder="email@example.com"
+                    required
+                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
                 <button
                   type="submit"
-                  className="bg-blue-600 hover:bg-blue-700 text-white rounded-r-lg px-4 py-2"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-4 py-2"
                 >
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                  </svg>
+                  Continue to Chat
                 </button>
-              </div>
-              <p className="text-xs text-gray-500 mt-2">
-                Messages will be sent to our team at info@superiorcaregroup.co.uk
-              </p>
-            </form>
+                <p className="text-xs text-gray-500 mt-2">
+                  We'll use your email to respond to your query
+                </p>
+              </form>
+            ) : (
+              <form onSubmit={handleSendMessage} className="border-t border-gray-200 p-4">
+                <div className="flex">
+                  <input
+                    type="text"
+                    value={newMessage}
+                    onChange={(e) => setNewMessage(e.target.value)}
+                    placeholder="Type your message..."
+                    className="flex-1 border border-gray-300 rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  <button
+                    type="submit"
+                    className="bg-blue-600 hover:bg-blue-700 text-white rounded-r-lg px-4 py-2"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                    </svg>
+                  </button>
+                </div>
+                <p className="text-xs text-gray-500 mt-2">
+                  Replying to {userEmail}
+                </p>
+              </form>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

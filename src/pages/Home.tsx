@@ -1,7 +1,11 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import VideoWidget from '../components/VideoWidget';
+import { videos } from '../config/videos';
+import { images } from '../config/images';
+import { sendFormToWebhook } from '../utils/formHandler';
 
 // Declare the CQCWidget type for TypeScript
 declare global {
@@ -776,15 +780,17 @@ const Home = () => {
                 <div className="w-12 h-12 rounded-full bg-amber-400 flex items-center justify-center border-2 border-white text-blue-900 font-bold text-xs shadow-md">30+</div>
               </div>
               <p className="text-lg text-gray-700">Join the <span className="font-semibold">1,000+ families</span> who trust Superior Care Group</p>
-              <Link
-                to="/contact"
+              <a
+                href="https://www.carehome.co.uk/carehome.cfm/searchazref/superior-care-group"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center px-6 py-3 rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 transition-all shadow-md hover:shadow-lg"
               >
                 <span>Read More Reviews</span>
                 <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
-              </Link>
+              </a>
             </div>
           </div>
         </section>
@@ -834,12 +840,36 @@ const Home = () => {
                   <p className="text-blue-900/70">Complete this short form to get started with your care journey</p>
                 </div>
                 
-                <form className="mt-8 space-y-5">
+                <form className="mt-8 space-y-5" onSubmit={(e) => {
+                  e.preventDefault();
+                  // Handle form submission
+                  const form = e.target as HTMLFormElement;
+                  const formData = new FormData(form);
+                  
+                  // Send the form data to the webhook
+                  sendFormToWebhook(formData, 'home_assessment')
+                    .then(response => {
+                      if (response.ok) {
+                        // Reset form on success
+                        form.reset();
+                        // You could add a success message here
+                        alert('Thank you for requesting an assessment. We will contact you soon!');
+                      } else {
+                        alert('There was an error submitting the form. Please try again later.');
+                      }
+                    })
+                    .catch(error => {
+                      console.error('Form submission error:', error);
+                      alert('There was an error submitting the form. Please try again later.');
+                    });
+                }}>
                   <div className="grid grid-cols-2 gap-5">
                     <div>
                       <label className="block text-white text-sm font-medium mb-2">First Name</label>
                       <input 
                         type="text"
+                        name="firstName"
+                        required
                         className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-amber-400"
                         placeholder="First name"
                       />
@@ -848,6 +878,8 @@ const Home = () => {
                       <label className="block text-white text-sm font-medium mb-2">Last Name</label>
                       <input 
                         type="text"
+                        name="lastName"
+                        required
                         className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-amber-400"
                         placeholder="Last name"
                       />
@@ -859,6 +891,8 @@ const Home = () => {
                       <label className="block text-white text-sm font-medium mb-2">Phone Number</label>
                       <input 
                         type="tel"
+                        name="phone"
+                        required
                         className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-amber-400"
                         placeholder="Your phone number"
                       />
@@ -867,6 +901,8 @@ const Home = () => {
                       <label className="block text-white text-sm font-medium mb-2">Email Address</label>
                       <input 
                         type="email"
+                        name="email"
+                        required
                         className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-amber-400"
                         placeholder="Your email"
                       />
@@ -875,7 +911,10 @@ const Home = () => {
                   
                   <div>
                     <label className="block text-white text-sm font-medium mb-2">Type of Care Needed</label>
-                    <select className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-400">
+                    <select 
+                      name="careType"
+                      required
+                      className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-400">
                       <option value="" className="bg-blue-800">Select care type</option>
                       <option value="home-care" className="bg-blue-800">Home Care</option>
                       <option value="community-care" className="bg-blue-800">Community Care</option>
@@ -887,6 +926,7 @@ const Home = () => {
                   <div>
                     <label className="block text-white text-sm font-medium mb-2">Additional Information</label>
                     <textarea 
+                      name="additionalInfo"
                       className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-amber-400"
                       placeholder="Please tell us about your care needs..."
                       rows={3}
@@ -960,7 +1000,10 @@ const Home = () => {
                 <p className="text-gray-600 mb-4">
                   Our services are regularly inspected and regulated by the Care Quality Commission, ensuring we maintain the highest standards of care.
                 </p>
-                <a href="#" className="text-blue-600 hover:text-blue-800 inline-flex items-center font-medium">
+                <a href="https://www.cqc.org.uk/location/1-8261537167" 
+                   className="text-blue-600 hover:text-blue-800 inline-flex items-center font-medium"
+                   target="_blank"
+                   rel="noopener noreferrer">
                   View Our CQC Rating
                   <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -984,7 +1027,10 @@ const Home = () => {
                 <p className="text-gray-600 mb-4">
                   We work in partnership with the NHS and local authorities to deliver continuing healthcare and reablement services across Milton Keynes.
                 </p>
-                <a href="#" className="text-blue-600 hover:text-blue-800 inline-flex items-center font-medium">
+                <a href="https://www.england.nhs.uk/continuing-healthcare/"
+                   className="text-blue-600 hover:text-blue-800 inline-flex items-center font-medium"
+                   target="_blank"
+                   rel="noopener noreferrer">
                   Our Healthcare Partnerships
                   <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -1008,7 +1054,10 @@ const Home = () => {
                 <p className="text-gray-600 mb-4">
                   Our care professionals undergo industry-leading training programs, including specialized dementia care, end of life care, and medication management.
                 </p>
-                <a href="#" className="text-blue-600 hover:text-blue-800 inline-flex items-center font-medium">
+                <a href="https://www.tradingstandards.uk/commercial-services/code-sponsors/cta-approved-code"
+                   className="text-blue-600 hover:text-blue-800 inline-flex items-center font-medium"
+                   target="_blank"
+                   rel="noopener noreferrer">
                   Our Training Standards
                   <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -1049,7 +1098,29 @@ const Home = () => {
                   </ul>
                 </div>
                 <div className="bg-white text-gray-900 p-5 rounded-xl shadow-lg">
-                  <form className="space-y-3">
+                  <form className="space-y-3" onSubmit={(e) => {
+                    e.preventDefault();
+                    // Handle form submission
+                    const form = e.target as HTMLFormElement;
+                    const formData = new FormData(form);
+                    
+                    // Send the form data to the webhook
+                    sendFormToWebhook(formData, 'guide_download')
+                      .then(response => {
+                        if (response.ok) {
+                          // Reset form on success
+                          form.reset();
+                          // You could add a success message here
+                          alert('Thank you! Your care guide will be sent to your email shortly.');
+                        } else {
+                          alert('There was an error submitting the form. Please try again later.');
+                        }
+                      })
+                      .catch(error => {
+                        console.error('Form submission error:', error);
+                        alert('There was an error submitting the form. Please try again later.');
+                      });
+                  }}>
                     <div>
                       <label htmlFor="guide-name" className="block text-sm font-medium text-gray-700">
                         Full Name
@@ -1058,6 +1129,7 @@ const Home = () => {
                         type="text"
                         id="guide-name"
                         name="name"
+                        required
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-800 focus:ring-blue-800"
                       />
                     </div>
@@ -1069,6 +1141,7 @@ const Home = () => {
                         type="email"
                         id="guide-email"
                         name="email"
+                        required
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500"
                       />
                     </div>
