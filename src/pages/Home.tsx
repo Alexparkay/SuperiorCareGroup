@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { useEffect } from 'react';
+import { images } from '../config/images';
 
 // Declare the CQCWidget type for TypeScript
 declare global {
@@ -51,16 +52,16 @@ const Home = () => {
     {
       title: 'Home Care',
       description: 'Expert 24/7 home care services including personal care, medication management, and companionship. CQC-registered carers supporting independence and dignity.',
-      image: 'https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&q=80',
+      image: images.services.personalCare,
       link: '/home-care',
       features: ['Personal Care', 'Medication Support', 'Meal Preparation', '24/7 Care Available'],
     },
     {
       title: 'Dementia Care',
       description: 'Specialized dementia and Alzheimer\'s care delivered by trained professionals. Person-centered support that maintains dignity and familiar routines.',
-      image: 'https://images.unsplash.com/photo-1516728778615-2d590ea1855e?auto=format&fit=crop&q=80',
-      link: '/home-care#dementia',
-      features: ['Memory Support', 'Safety Monitoring', 'Family Support', 'Specialist Training'],
+      image: images.services.medicationManagement,
+      link: '/home-care',
+      features: ['Memory Support', 'Familiar Routines', 'Skilled Professionals', 'Family Guidance'],
     },
     {
       title: 'Supported Living',
@@ -72,6 +73,27 @@ const Home = () => {
   ];
 
   const testimonials = [
+    {
+      name: "Sarah Johnson",
+      role: "Family Member",
+      quote: "Superior Care Group provided exceptional care for my mother. Their staff was compassionate, reliable, and truly made a difference in her quality of life.",
+      image: images.testimonials.client1,
+      rating: 5,
+    },
+    {
+      name: "Michael Peters",
+      role: "Client",
+      quote: "The support I've received has been life-changing. The carers are professional and have helped me maintain my independence while providing the assistance I need.",
+      image: images.testimonials.client2,
+      rating: 5,
+    },
+    {
+      name: "Amanda Wright",
+      role: "Healthcare Professional",
+      quote: "As a healthcare professional, I've been impressed with the quality of care provided. They maintain high standards and truly put clients at the center of everything they do.",
+      image: images.testimonials.client3,
+      rating: 5,
+    },
     {
       quote: "I wasn't sure about getting outside help at first, but my mum's carer Priya has been amazing! She remembers all the little things mum likes and even brings her favorite biscuits sometimes. It's not just about the care tasks - they've built a real connection.",
       author: "Mei Lin Cheng",
@@ -140,14 +162,19 @@ const Home = () => {
     <>
       <Helmet>
         <title>Superior Care Group | Professional Home Care & Community Support Services</title>
-        <meta name="description" content="Award-winning home care services in Milton Keynes. Specializing in dementia care, elderly support & learning disability care. CQC registered, DBS checked carers. Book a free care assessment today." />
-        <meta name="keywords" content="home care services, dementia care, elderly care, learning disability support, live-in care, respite care, personal care, medication management, CQC registered care, Milton Keynes care" />
-        <link rel="canonical" href="https://superiorcaregroup.co.uk" />
-        <meta property="og:title" content="Superior Care Group | Professional Home Care Services" />
-        <meta property="og:description" content="Trusted home care services delivered with compassion in Milton Keynes. CQC registered, experienced carers providing personalized support for elderly care, dementia care & disability support." />
-        <meta property="og:image" content="/images/og-image.jpg" />
-        <meta property="og:url" content="https://superiorcaregroup.co.uk" />
+        <meta name="description" content="Superior Care Group provides professional home care and community care services with compassionate, person-centered support for individuals of all needs." />
+        <link rel="canonical" href="/" />
+        
+        {/* Social media meta tags */}
+        <meta property="og:title" content="Superior Care Group | Professional Home Care & Community Support" />
+        <meta property="og:description" content="Compassionate, professional care services tailored to individual needs. CQC-registered with expert staff." />
+        <meta property="og:url" content="/" />
+        <meta property="og:type" content="website" />
+        
+        {/* Twitter card meta tags */}
         <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Superior Care Group | Home Care Specialists" />
+        <meta name="twitter:description" content="Compassionate, professional care services tailored to individual needs." />
       </Helmet>
 
       <main className="overflow-hidden">
