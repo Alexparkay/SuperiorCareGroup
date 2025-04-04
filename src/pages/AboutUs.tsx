@@ -392,7 +392,7 @@ const AboutUs = () => {
                   <div className="bg-white rounded-xl p-6 shadow-warm border border-gray-200">
                     <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Beginnings</h3>
                     <p className="text-gray-700 leading-relaxed">
-                      Superior Care Group began as a small family operation in 2010, inspired by our founder Raj Basi's personal experience caring for his aging parents. What started as a mission to provide the kind of care his own family members deserved soon grew into a broader vision: to revolutionize home care services with a deeply personal touch.
+                      At Superior Care Group, our story began with a deeply personal mission. In 2012, our founder, Manjit Basi, a dedicated registered nurse serving the Milton Keynes community, was inspired to create something truly special – a care company built on empathy, respect, and an unwavering commitment to quality. What started as a small, family-run operation has grown into a trusted name in care, driven by the same values that sparked our journey. With firsthand experience in the healthcare field, Manjit recognized the need for a more personal, dignified approach to care – one that truly puts people first.
                     </p>
                   </div>
                   
@@ -412,36 +412,34 @@ const AboutUs = () => {
                 </div>
               </div>
               
-              {/* Right side - Image */}
+              {/* Right side - Quote Area (Replacing the Image) */}
               <div className="w-full lg:w-1/2 order-1 lg:order-2">
-                <div className="sticky top-8">
-                  <div className="relative rounded-2xl overflow-hidden shadow-xl h-full">
-                    <div className="absolute inset-0 bg-gradient-to-tr from-gray-900/70 to-gray-900/30 z-10"></div>
-                    <img
-                      src={familyPortraits[3].src}
-                      alt={familyPortraits[3].alt}
-                      className="w-full h-[600px] object-cover"
-                    />
-                    
-                    <div className="absolute bottom-0 left-0 right-0 p-8 z-20">
-                      <span className="inline-block px-3 py-1 bg-amber-500/80 text-white text-xs font-bold rounded-full mb-2">EST. 2010</span>
-                      <h3 className="text-2xl font-bold text-white mb-2">The Basi Family</h3>
-                      <p className="text-white/90 text-lg">{familyPortraits[3].caption}</p>
+                <div className="sticky top-8 space-y-6">
+                  <div className="bg-gradient-to-br from-blue-900 to-blue-800 rounded-2xl p-8 text-white shadow-xl">
+                    <div className="flex justify-center mb-6">
+                      <svg className="w-16 h-16 text-amber-400/60" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z"></path>
+                      </svg>
                     </div>
-                  </div>
-                  
-                  <div className="mt-8 bg-blue-900 rounded-xl p-6 text-white shadow-xl">
-                    <p className="italic text-blue-100 leading-relaxed mb-4">
+                    <p className="italic text-blue-100 leading-relaxed text-xl text-center mb-6">
                       "We believe that the best care comes from the heart. Our family is committed to ensuring that Superior Care Group continues to provide the kind of care that we would want for our own loved ones."
                     </p>
-                    <div className="flex items-center">
-                      <div className="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center mr-3">
-                        <svg className="w-5 h-5 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="flex justify-center items-center">
+                      <div className="w-12 h-12 rounded-full bg-amber-500/30 flex items-center justify-center mr-3">
+                        <svg className="w-6 h-6 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                       </div>
-                      <span className="text-amber-300 font-medium">— The Basi Family</span>
+                      <span className="text-amber-300 font-medium text-lg">— Manjit Basi</span>
                     </div>
+                  </div>
+                  
+                  <div className="bg-white p-8 rounded-2xl shadow-warm border border-amber-100">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">Est. 2012</h3>
+                    <div className="h-0.5 w-16 bg-amber-400 mx-auto mb-6"></div>
+                    <p className="text-gray-700 text-lg text-center">
+                      A decade of delivering exceptional care services with empathy, respect, and an unwavering commitment to quality.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -529,7 +527,7 @@ const AboutUs = () => {
               </p>
               <div className="flex justify-center">
                 <span className="inline-block px-6 py-3 border-2 border-white/30 rounded-full backdrop-blur-sm">
-                  The Basi Family
+                  Manjit Basi
                 </span>
               </div>
             </motion.div>
@@ -686,7 +684,7 @@ const AboutUs = () => {
               <div className="mt-12 bg-blue-50 p-6 rounded-xl border border-blue-100">
                 <h4 className="text-xl font-semibold text-gray-900 mb-3">Our Extended Family</h4>
                 <p className="text-gray-600">
-                  Beyond our leadership team, Superior Care Group is powered by over 50 dedicated care professionals who share our family values and commitment to exceptional care.
+                  Beyond our leadership team, Superior Care Group is powered by over 100 dedicated care professionals who share our family values and commitment to exceptional care.
                 </p>
               </div>
             </div>

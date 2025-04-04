@@ -6,51 +6,9 @@ import VideoWidget from '../components/VideoWidget';
 import { videos } from '../config/videos';
 import { images } from '../config/images';
 import { sendFormToWebhook } from '../utils/formHandler';
-
-// Declare the CQCWidget type for TypeScript
-declare global {
-  interface Window {
-    CQCWidget?: {
-      init: () => void;
-    };
-  }
-}
+import CQCWidget from '../components/CQCWidget';
 
 const Home = () => {
-  // Initialize CQC widget when component mounts
-  useEffect(() => {
-    // Safer implementation that won't break the page if the widget fails to load
-    try {
-      const loadWidget = () => {
-        if (window.CQCWidget) {
-          try {
-            window.CQCWidget.init();
-          } catch (error) {
-            console.error('Error initializing CQC widget:', error);
-          }
-        }
-      };
-
-      // Check if script is already loaded
-      if (document.querySelector('script[src="https://www.cqc.org.uk/sites/all/modules/custom/cqc_widget/widget.js"]')) {
-        loadWidget();
-      } else {
-        // If not loaded, create a script element and append it to the document
-        const script = document.createElement('script');
-        script.src = 'https://www.cqc.org.uk/sites/all/modules/custom/cqc_widget/widget.js';
-        script.async = true;
-        script.onload = loadWidget;
-        script.onerror = () => console.error('Failed to load CQC widget script');
-        document.body.appendChild(script);
-      }
-    } catch (error) {
-      console.error('Error setting up CQC widget:', error);
-    }
-
-    // No cleanup needed - we'll let the script remain on the page
-    return () => {};
-  }, []);
-
   const services = [
     {
       title: 'Home Care',
@@ -77,43 +35,39 @@ const Home = () => {
 
   const testimonials = [
     {
+      quote: "Mum talked endless about her Carers, and how she felt they had become a part of her extended family. Mum was a very proud person, fiercely independent in her early life. However, as she became less able to care for herself, she realised that she did need some help. At first she was nervous about strangers coming into her home, but as she was always treated with respect and kindness by her regular carers, she began to enjoy their visit and become very fond of them all.",
+      author: "Family Member",
+      relation: "Child of Home Care Client",
+      rating: 5,
+      location: "Milton Keynes"
+    },
+    {
       quote: "I wasn't sure about getting outside help at first, but my mum's carer Priya has been amazing! She remembers all the little things mum likes and even brings her favorite biscuits sometimes. It's not just about the care tasks - they've built a real connection.",
-      author: "Mei Lin Cheng",
+      author: "Family Member",
       relation: "Daughter of Home Care Client",
-      image: "https://images.unsplash.com/photo-1557053815-9f79f70c7980?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&q=80",
       rating: 5,
       location: "Milton Keynes"
     },
     {
       quote: "The carers looking after my dad have been a godsend. There was a mix-up with timing once, but they sorted it quickly and were really apologetic. Dad can be stubborn (!) but they know how to get him to take his meds without any fuss. Worth every penny for the peace of mind.",
-      author: "Rajiv Patel",
+      author: "Family Member",
       relation: "Son of Home Care Client",
-      image: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&q=80",
       rating: 5,
       location: "Milton Keynes"
     },
     {
-      quote: "My aunt has dementia and gets confused easily. The SCG team has been so patient with her repeated questions and anxieties. They even helped sort out a plumbing issue once when I couldn't get there - totally beyond what they needed to do. Not perfect all the time (who is?), but genuinely caring people.",
-      author: "Sophia Nowak",
-      relation: "Niece of Dementia Care Client",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&q=80",
-      rating: 4,
-      location: "Newport Pagnell"
-    },
-    {
-      quote: "Been using Superior Care for about 8 months now. Had to change carers once as the first one wasn't the right fit, but they listened to my concerns. Current team is brilliant - they don't rush through visits and actually take time to chat. The office sometimes takes a while to get back to you, but the care itself is top-notch.",
-      author: "Amir Hassan",
-      relation: "Home Care Client",
-      image: "https://images.unsplash.com/photo-1566753323558-f4e0952af115?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&q=80",
-      rating: 4,
-      location: "Bletchley"
+      quote: "I would like to thank your team for offering such a professional and efficient service. It's great to meet management that care and have good values that they instil with staff. Always very punctual on arrival and help make my father feel as comfortable as possible. If there are any ever issues, they are very approachable and deal with matter swiftly.",
+      author: "Family Member",
+      relation: "Son of Home Care Client",
+      rating: 5,
+      location: "Milton Keynes"
     }
   ];
 
   const trustSignals = [
     {
       icon: (
-        <svg className="w-16 h-16 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-16 h-16 text-[#2c84bf]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
         </svg>
       ),
@@ -122,7 +76,7 @@ const Home = () => {
     },
     {
       icon: (
-        <svg className="w-16 h-16 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-16 h-16 text-[#2c84bf]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
         </svg>
       ),
@@ -131,7 +85,7 @@ const Home = () => {
     },
     {
       icon: (
-        <svg className="w-16 h-16 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-16 h-16 text-[#2c84bf]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
         </svg>
       ),
@@ -177,69 +131,80 @@ const Home = () => {
               transition={{ duration: 1 }}
               className="text-white max-w-3xl"
             >
-              <div className="inline-block bg-blue-600/30 backdrop-blur-sm px-6 py-2 rounded-full mb-6 border border-blue-400/20">
-                <span className="text-lg font-medium text-white">CQC Registered Care Provider</span>
+              <div className="inline-block bg-gradient-to-r from-[#2d80bb]/30 to-[#2d80bb]/20 backdrop-blur-sm px-8 py-3 rounded-full mb-8 border border-[#2d80bb]/20 shadow-[0_0_15px_rgba(45,128,187,0.15)]">
+                <span className="text-lg font-medium text-white tracking-wide">CQC Registered Care Provider</span>
               </div>
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight drop-shadow-xl">
+              <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight drop-shadow-xl bg-clip-text text-transparent bg-gradient-to-r from-white to-white/90">
                 Trusted Home Care
-                <span className="block text-amber-400 mt-2">That Feels Like Family</span>
+                <span className="block mt-3 bg-gradient-to-r from-[#2d80bb] via-[#4a9ed1] to-[#2d80bb] bg-clip-text text-transparent drop-shadow-[0_0_10px_rgba(45,128,187,0.3)]">That Feels Like Family</span>
               </h1>
-              <p className="text-xl md:text-2xl text-blue-100 mb-10 leading-relaxed max-w-2xl mx-auto drop-shadow-md">
+              <p className="text-xl md:text-2xl text-blue-100/90 mb-12 leading-relaxed max-w-2xl mx-auto drop-shadow-md font-light">
                 Professional, compassionate support for you and your loved ones. 
-                Available 24/7 in Milton Keynes.
+                <span className="block mt-2 text-white/80">Available 24/7 in Milton Keynes.</span>
               </p>
-              <div className="flex flex-col sm:flex-row gap-8 justify-center">
+              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
                 <a
                   href="#genuine-care"
-                  className="group relative overflow-hidden bg-gradient-to-r from-amber-400 to-amber-500 text-blue-900 px-10 py-5 rounded-full font-bold text-lg hover:from-amber-300 hover:to-amber-400 transform hover:scale-105 transition-all shadow-2xl"
+                  className="group relative overflow-hidden bg-gradient-to-r from-[#2d80bb] via-[#4a9ed1] to-[#2d80bb] text-white px-10 py-4 rounded-full font-bold text-lg transition-all shadow-[0_4px_20px_rgba(45,128,187,0.3)] hover:shadow-[0_8px_30px_rgba(45,128,187,0.45)] transform hover:translate-y-[-2px] border border-white/10 backdrop-blur-sm w-full sm:w-auto"
                 >
-                  <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
-                  <div className="flex items-center justify-center relative z-10">
-                    <svg className="w-7 h-7 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-transparent transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                  <div className="flex items-center justify-center relative z-10 space-x-3">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
-                    <span>Book Free Care Assessment</span>
-                    <svg className="w-6 h-6 ml-3 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    <span className="tracking-wide">Book Free Care Assessment</span>
+                    <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
                   </div>
                 </a>
                 <a
                   href="tel:01908522245"
-                  className="group relative overflow-hidden bg-white/10 backdrop-blur-sm border border-white/30 text-white px-10 py-5 rounded-full font-bold text-lg hover:bg-white/20 transition-all flex items-center justify-center shadow-2xl"
+                  className="group relative overflow-hidden bg-gradient-to-r from-white/10 via-white/15 to-white/10 backdrop-blur-sm border border-white/20 text-white px-10 py-4 rounded-full font-bold text-lg transition-all shadow-[0_4px_20px_rgba(255,255,255,0.1)] hover:shadow-[0_8px_30px_rgba(255,255,255,0.15)] transform hover:translate-y-[-2px] w-full sm:w-auto"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-white/10 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
-                  <div className="flex items-center justify-center relative z-10">
-                    <svg className="w-7 h-7 mr-3 animate-pulse text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#2d80bb]/0 via-[#2d80bb]/10 to-transparent transform translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                  <div className="flex items-center justify-center relative z-10 space-x-3">
+                    <svg className="w-6 h-6 text-[#2d80bb] drop-shadow-[0_0_8px_rgba(45,128,187,0.5)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
-                    <span>Call Us: 01908 522245</span>
+                    <span className="tracking-wide whitespace-nowrap">Call Us: 01908 522245</span>
                   </div>
                 </a>
               </div>
+            </motion.div>
+            
+            {/* Add the CQC Widget here, before the trust signals section */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.3 }}
+              className="mt-8 mb-8 inline-flex flex-col items-center bg-white/10 backdrop-blur-sm px-6 py-3 rounded-xl border border-white/20"
+            >
+              <div className="text-white text-sm font-medium mb-1">Care Quality Commission Rating:</div>
+              <CQCWidget />
             </motion.div>
             
             <motion.div
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.5 }}
-              className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20"
+              className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8 max-w-4xl mx-auto w-full"
             >
               {trustSignals.map((signal, index) => (
-                  <motion.div
-                    key={signal.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                <motion.div
+                  key={signal.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.2 + 1 }}
-                    className="flex flex-col items-center text-center"
-                  >
-                  <div className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mb-3 shadow-lg">
-                    <div className="w-16 h-16 text-amber-400">{signal.icon}</div>
+                  className="flex flex-col items-center text-center"
+                >
+                  <div className="w-16 h-16 flex items-center justify-center mb-4">
+                    <div className="w-full h-full text-[#2d80bb]">{signal.icon}</div>
                   </div>
-                  <h3 className="text-lg font-semibold text-white mb-1">{signal.title}</h3>
+                  <h3 className="text-lg font-semibold text-white mb-2">{signal.title}</h3>
                   <p className="text-sm text-blue-100">{signal.description}</p>
-                  </motion.div>
-                ))}
+                </motion.div>
+              ))}
             </motion.div>
           </div>
         </section>
@@ -706,60 +671,53 @@ const Home = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
               {testimonials.map((testimonial, index) => (
                 <motion.div
-                  key={testimonial.author}
+                  key={testimonial.author + index}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.2 }}
                   className="bg-white rounded-xl p-8 relative shadow-warm hover:shadow-xl transition-all border border-gray-100"
                 >
-                  <div className="flex items-start gap-6">
-                    <img
-                      src={testimonial.image}
-                      alt={testimonial.author}
-                      className="w-20 h-20 rounded-full object-cover ring-4 ring-blue-100 shadow-md"
-                    />
-                    <div>
-                      <div className="flex items-center mb-2">
-                        {[...Array(testimonial.rating)].map((_, i) => (
-                          <svg
-                            key={i}
-                            className="w-5 h-5 text-amber-500"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                        ))}
-                        {testimonial.rating < 5 && [...Array(5 - testimonial.rating)].map((_, i) => (
-                          <svg
-                            key={i + testimonial.rating}
-                            className="w-5 h-5 text-gray-300"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                          </svg>
-                        ))}
-                        <span className="ml-2 text-sm text-gray-500">
-                          {testimonial.rating === 5 ? "Excellent" : testimonial.rating === 4 ? "Very Good" : "Good"}
-                        </span>
+                  <div>
+                    <div className="flex items-center mb-2">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <svg
+                          key={i}
+                          className="w-5 h-5 text-amber-500"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
+                      {testimonial.rating < 5 && [...Array(5 - testimonial.rating)].map((_, i) => (
+                        <svg
+                          key={i + testimonial.rating}
+                          className="w-5 h-5 text-gray-300"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      ))}
+                      <span className="ml-2 text-sm text-gray-500">
+                        {testimonial.rating === 5 ? "Excellent" : testimonial.rating === 4 ? "Very Good" : "Good"}
+                      </span>
+                    </div>
+                    <svg className="w-10 h-10 text-amber-200 absolute top-6 right-8" fill="currentColor" viewBox="0 0 32 32">
+                      <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+                    </svg>
+                    <p className="text-gray-600 mb-4 text-lg italic">{testimonial.quote}</p>
+                    <div className="flex justify-between items-end">
+                      <div>
+                        <p className="font-semibold text-gray-900">{testimonial.author}</p>
+                        <p className="text-sm text-blue-600">{testimonial.relation}</p>
                       </div>
-                      <svg className="w-10 h-10 text-amber-200 absolute top-6 right-8" fill="currentColor" viewBox="0 0 32 32">
-                        <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
-                      </svg>
-                      <p className="text-gray-600 mb-4 text-lg italic">{testimonial.quote}</p>
-                      <div className="flex justify-between items-end">
-                        <div>
-                      <p className="font-semibold text-gray-900">{testimonial.author}</p>
-                      <p className="text-sm text-blue-600">{testimonial.relation}</p>
-                        </div>
-                        <div className="flex items-center text-amber-600 text-sm">
-                          <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                          </svg>
-                          {testimonial.location}
-                        </div>
+                      <div className="flex items-center text-amber-600 text-sm">
+                        <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                        </svg>
+                        {testimonial.location}
                       </div>
                     </div>
                   </div>
@@ -768,20 +726,9 @@ const Home = () => {
             </div>
             
             <div className="flex justify-center items-center space-x-6">
-              <div className="flex -space-x-4">
-                {testimonials.map((testimonial, index) => (
-                  <img 
-                    key={index}
-                    src={testimonial.image} 
-                    alt="Client" 
-                    className="w-12 h-12 rounded-full border-2 border-white object-cover shadow-md"
-                  />
-                ))}
-                <div className="w-12 h-12 rounded-full bg-amber-400 flex items-center justify-center border-2 border-white text-blue-900 font-bold text-xs shadow-md">30+</div>
-              </div>
               <p className="text-lg text-gray-700">Join the <span className="font-semibold">1,000+ families</span> who trust Superior Care Group</p>
               <a
-                href="https://www.carehome.co.uk/carehome.cfm/searchazref/superior-care-group"
+                href="https://www.homecare.co.uk/homecare/agency.cfm/id/65432197301"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-6 py-3 rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800 transition-all shadow-md hover:shadow-lg"
@@ -819,10 +766,8 @@ const Home = () => {
                 </p>
                 
                 <div className="mt-12 flex items-center space-x-4 justify-center lg:justify-start">
-                  <div className="flex -space-x-4">
-                    <img src="https://images.unsplash.com/photo-1557053815-9f79f70c7980?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&q=80" alt="Client" className="w-12 h-12 rounded-full border-2 border-blue-600 object-cover" />
-                    <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&q=80" alt="Client" className="w-12 h-12 rounded-full border-2 border-blue-600 object-cover" />
-                    <div className="w-12 h-12 rounded-full bg-amber-400 flex items-center justify-center border-2 border-blue-600 text-blue-900 font-bold text-xs">15+</div>
+                  <div className="flex items-center">
+                    <div className="w-12 h-12 rounded-full bg-amber-400 flex items-center justify-center border-2 border-blue-600 text-blue-900 font-bold text-xs">1,000+</div>
                   </div>
                   <p className="text-blue-100">Join over <span className="font-bold text-white">1,000 families</span> who trust Superior Care Group</p>
                 </div>
@@ -916,7 +861,7 @@ const Home = () => {
                       required
                       className="w-full px-4 py-3 bg-white/10 border border-white/30 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-amber-400">
                       <option value="" className="bg-blue-800">Select care type</option>
-                      <option value="home-care" className="bg-blue-800">Home Care</option>
+                      <option value="home-care" className="bg-blue-800">Homecare/Domiciliary Care</option>
                       <option value="community-care" className="bg-blue-800">Community Care</option>
                       <option value="learning-disabilities" className="bg-blue-800">Learning Disabilities Support</option>
                       <option value="mental-health" className="bg-blue-800">Mental Health Support</option>
@@ -991,8 +936,8 @@ const Home = () => {
                 transition={{ delay: 0.1 }}
                 className="bg-white rounded-xl p-8 shadow-warm border border-gray-100"
               >
-                <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6">
-                  <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-14 h-14 bg-[#2d80bb]/10 rounded-full flex items-center justify-center mb-6">
+                  <svg className="w-8 h-8 text-[#2d80bb]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                 </div>
@@ -1001,7 +946,7 @@ const Home = () => {
                   Our services are regularly inspected and regulated by the Care Quality Commission, ensuring we maintain the highest standards of care.
                 </p>
                 <a href="https://www.cqc.org.uk/location/1-8261537167" 
-                   className="text-blue-600 hover:text-blue-800 inline-flex items-center font-medium"
+                   className="text-[#2d80bb] hover:text-[#2d80bb]/80 inline-flex items-center font-medium"
                    target="_blank"
                    rel="noopener noreferrer">
                   View Our CQC Rating
@@ -1018,8 +963,8 @@ const Home = () => {
                 transition={{ delay: 0.2 }}
                 className="bg-white rounded-xl p-8 shadow-warm border border-gray-100"
               >
-                <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6">
-                  <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-14 h-14 bg-[#2d80bb]/10 rounded-full flex items-center justify-center mb-6">
+                  <svg className="w-8 h-8 text-[#2d80bb]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                   </svg>
                 </div>
@@ -1028,7 +973,7 @@ const Home = () => {
                   We work in partnership with the NHS and local authorities to deliver continuing healthcare and reablement services across Milton Keynes.
                 </p>
                 <a href="https://www.england.nhs.uk/continuing-healthcare/"
-                   className="text-blue-600 hover:text-blue-800 inline-flex items-center font-medium"
+                   className="text-[#2d80bb] hover:text-[#2d80bb]/80 inline-flex items-center font-medium"
                    target="_blank"
                    rel="noopener noreferrer">
                   Our Healthcare Partnerships
@@ -1045,17 +990,17 @@ const Home = () => {
                 transition={{ delay: 0.3 }}
                 className="bg-white rounded-xl p-8 shadow-warm border border-gray-100"
               >
-                <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6">
-                  <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-14 h-14 bg-[#2d80bb]/10 rounded-full flex items-center justify-center mb-6">
+                  <svg className="w-8 h-8 text-[#2d80bb]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                   </svg>
-                  </div>
+                </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">Award-Winning Training</h3>
                 <p className="text-gray-600 mb-4">
                   Our care professionals undergo industry-leading training programs, including specialized dementia care, end of life care, and medication management.
                 </p>
                 <a href="https://www.tradingstandards.uk/commercial-services/code-sponsors/cta-approved-code"
-                   className="text-blue-600 hover:text-blue-800 inline-flex items-center font-medium"
+                   className="text-[#2d80bb] hover:text-[#2d80bb]/80 inline-flex items-center font-medium"
                    target="_blank"
                    rel="noopener noreferrer">
                   Our Training Standards
