@@ -2,5 +2,8 @@
 node_modules
 .env
 .env.local
+.env.*
 .DS_Store
-*.log 
+*.log
+README.md
+netlify.toml 

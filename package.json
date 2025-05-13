@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
-    "vercel-build": "npm ci && npm run build",
+    "vercel-build": "chmod +x build.sh && ./build.sh",
     "preview": "vite preview"
   },
   "devDependencies": {
@@ -35,6 +35,6 @@
     "react-router-dom": "^6.19.0"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=16.14.0"
   }
 }
