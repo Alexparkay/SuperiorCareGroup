@@ -6,6 +6,13 @@ export default defineConfig({
   plugins: [
     react({
       include: '**/*.{jsx,tsx}',
+      babel: {
+        presets: [
+          ['@babel/preset-env', { targets: { node: 'current' } }],
+          '@babel/preset-react',
+          '@babel/preset-typescript'
+        ],
+      }
     })
   ],
   resolve: {
@@ -19,11 +26,11 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    sourcemap: process.env.NODE_ENV !== 'production',
+    sourcemap: false,
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: process.env.NODE_ENV === 'production',
+        drop_console: true,
         drop_debugger: true,
       },
     },
@@ -33,8 +40,19 @@ export default defineConfig({
           react: ['react', 'react-dom'],
           router: ['react-router-dom'],
           framer: ['framer-motion'],
+          ui: ['@heroicons/react']
         },
+        chunkFileNames: 'assets/js/[name]-[hash].js',
+        entryFileNames: 'assets/js/[name]-[hash].js',
+        assetFileNames: 'assets/[ext]/[name]-[hash].[ext]',
       },
     },
+    chunkSizeWarningLimit: 1000,
   },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom', 'framer-motion', '@heroicons/react'],
+  },
+  esbuild: {
+    logOverride: { 'this-is-undefined-in-esm': 'silent' }
+  }
 }); 

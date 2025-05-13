@@ -10,16 +10,16 @@ const Test = () => {
   const testFormWebhook = async () => {
     setLoading(true);
     try {
-      const testData = {
-        firstName: 'Test',
-        lastName: 'User',
-        email: 'test@example.com',
-        phone: '07123456789',
-        careType: 'Home Care',
-        message: 'This is a test message from the test page.'
-      };
+      // Create a proper FormData object
+      const formData = new FormData();
+      formData.append('firstName', 'Test');
+      formData.append('lastName', 'User');
+      formData.append('email', 'test@example.com');
+      formData.append('phone', '07123456789');
+      formData.append('careType', 'Home Care');
+      formData.append('message', 'This is a test message from the test page.');
       
-      const response = await sendFormToWebhook(testData);
+      const response = await sendFormToWebhook(formData, 'contact');
       setFormResult(`Form submission ${response.ok ? 'succeeded' : 'failed'} with status: ${response.status}`);
     } catch (error) {
       console.error('Form test error:', error);
