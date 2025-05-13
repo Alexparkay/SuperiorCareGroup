@@ -40,6 +40,28 @@ function FooterWrapper() {
   );
 }
 
+function AppRoutes() {
+  const location = useLocation();
+  
+  return (
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={
+          <ErrorBoundary>
+            <Home />
+          </ErrorBoundary>
+        } />
+        <Route path="/home-care" element={<HomeCare />} />
+        <Route path="/community-care" element={<CommunityCare />} />
+        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/careers" element={<Careers />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/your-local-team" element={<LocalTeam />} />
+      </Routes>
+    </AnimatePresence>
+  );
+}
+
 function App() {
   return (
     <Router>
@@ -51,21 +73,7 @@ function App() {
         {/* ScrollToTop component to ensure page starts at the top */}
         <ScrollToTop />
         
-        <AnimatePresence mode="wait">
-          <Routes>
-            <Route path="/" element={
-              <ErrorBoundary>
-                <Home />
-              </ErrorBoundary>
-            } />
-            <Route path="/home-care" element={<HomeCare />} />
-            <Route path="/community-care" element={<CommunityCare />} />
-            <Route path="/about-us" element={<AboutUs />} />
-            <Route path="/careers" element={<Careers />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/your-local-team" element={<LocalTeam />} />
-          </Routes>
-        </AnimatePresence>
+        <AppRoutes />
         
         {/* Conditionally render the Footer */}
         <FooterWrapper />
