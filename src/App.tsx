@@ -12,6 +12,7 @@ import AboutUs from './pages/AboutUs';
 import Careers from './pages/Careers';
 import Contact from './pages/Contact';
 import LocalTeam from './pages/LocalTeam';
+import { trackPageView } from './utils/analytics';
 
 // ScrollToTop component to handle scrolling to top on route changes
 function ScrollToTop() {
@@ -43,6 +44,12 @@ function FooterWrapper() {
 function AppRoutes() {
   const location = useLocation();
   
+  // Track page views
+  useEffect(() => {
+    const pageTitle = document.title;
+    trackPageView(location.pathname, pageTitle);
+  }, [location]);
+
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
